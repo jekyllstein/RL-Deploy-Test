@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.25
+# v0.19.46
 
 using Markdown
 using InteractiveUtils
@@ -127,8 +127,8 @@ summarystats([run_corridor_episode(s -> [0.5, 0.5]) |> first |> length for _ in 
 
 # ╔═╡ 9d815d9c-6e5a-473e-a395-6f92d504dbf3
 md"""
-### Exercise 13.1
->*Exercise 13.1* Use your knowledge of the gridworld and its dynamics to determine an *exact* symbolic expression for the optimal probability of selecting the right action in Example 13.1
+> ### *Exercise 13.1* 
+> Use your knowledge of the gridworld and its dynamics to determine an *exact* symbolic expression for the optimal probability of selecting the right action in Example 13.1
 
 Example 13.1 is a gridworld with 3 non-terminal states and a terminal state at the far right.  The reward is -1 per step.  States 1 and 3 have actions left/right that move in the expected directions but state 2 reverses the directions.  We use a performance measure $J(\mathbf{\theta}) = v_{\pi_\theta}(S)$.  Given our feature representations of $\mathbf{x}(s, \text{right}) = [1, 0]^{\top}$ and $\mathbf{x}(s, \text{left}) = [0, 1]^{\top}$, we can only learn policies that are stochastic in terms of left/right action selection but do not vary between states.  Also observe that due to probability constraints $p_{\text{right}} = 1 - p_{\text{left}}$. For simplicity, we will use the notation $p \hspace{5px} \dot = \hspace{5px} p_{\text{left}}$.
 
@@ -482,13 +482,11 @@ md"""
 
 # ╔═╡ 2e6d0374-1c93-48c8-b8ba-dd1a0c682d01
 md"""
-### Exercise 13.3
-> *Exercise 13.3* In Section 13.1 we considered policy parameterizations using the soft-max in action preferences (13.2) with linear action preferences (13.3).  For this parameterization, prove that the eligibility vector is
- 
-$\begin{flalign}
-	\nabla \ln \pi(a|s, \mathbf{\theta}) = \mathbf{x}(s, a) - \sum_b \pi(b|s, \mathbf{\theta}) \mathbf{x}(s, b) \tag{13.9}
-\end{flalign}$
-
+> ### *Exercise 13.3* 
+> In Section 13.1 we considered policy parameterizations using the soft-max in action preferences (13.2) with linear action preferences (13.3).  For this parameterization, prove that the eligibility vector is
+> $\begin{flalign}
+> 	\nabla \ln \pi(a|s, \mathbf{\theta}) = \mathbf{x}(s, a) - \sum_b \pi(b|s, \mathbf{\theta}) \mathbf{x}(s, b) \tag{13.9}
+> \end{flalign}$
 > using the definitions and elementary calculus.
 
 $\begin{flalign}
@@ -945,8 +943,8 @@ where $\mathbf{x}_\mu(s)$ and $\mathbf{x}_\sigma(s)$ are state feature vectors. 
 
 # ╔═╡ beb01fb8-c77d-4b5c-a66d-3812415e04a3
 md"""
-### Exercise 13.4
-> *Exercise 13.4* For the Gaussian policy parameterization, derive the formula for the eligibility vector $\nabla \ln{\pi(a|s, \mathbf{\theta})}$
+> ### *Exercise 13.4*
+> For the Gaussian policy parameterization, derive the formula for the eligibility vector $\nabla \ln{\pi(a|s, \mathbf{\theta})}$
 
 Starting with our expression for the parameter function, we can calculate the gradient: 
 
@@ -999,8 +997,8 @@ There are two components to the sum, one for $\mu$ and one for $\sigma$.  If we 
 
 # ╔═╡ 68e6f17e-8c87-40f0-a673-1115ecd1b71d
 md"""
-### Exercise 13.5
-> *Exercise 13.5* A *Bernoulli-logistic unit* is a stochastic neuron-like unit used in some ANNs.  Its input at time *t* is a feature vector $\mathbf{x}(S_t)$; its output, $A_t$, is a random variable having two values, 0 and 1, with $/Pr{A_t=1}=P_t$ and $/Pr{A_t=0}=1-P_t$ (the Bernoulli distribution).  Let $h(s, 0, \mathbf{\theta})$ and $h(s, 1, \mathbf{\theta})$ be the preferences in state $s$ for the unit's two actions given by policy parameter $\mathbf{\theta}$.  Assume that the difference between the action preferences is given by a weights sum of teh unit's input vector, that is, assume that $h(s, 1, \mathbf{\theta})-h(s,0, \mathbf{\theta}) = \mathbf{\theta}^\top \mathbf{x}(s)$, where $\mathbf{\theta}$ is the unit's weight vector.
+> ### *Exercise 13.5* 
+> A *Bernoulli-logistic unit* is a stochastic neuron-like unit used in some ANNs.  Its input at time *t* is a feature vector $\mathbf{x}(S_t)$; its output, $A_t$, is a random variable having two values, 0 and 1, with $\Pr \{A_t=1 \}=P_t$ and $\Pr\{A_t=0\}=1-P_t$ (the Bernoulli distribution).  Let $h(s, 0, \mathbf{\theta})$ and $h(s, 1, \mathbf{\theta})$ be the preferences in state $s$ for the unit's two actions given by policy parameter $\mathbf{\theta}$.  Assume that the difference between the action preferences is given by a weights sum of teh unit's input vector, that is, assume that $h(s, 1, \mathbf{\theta})-h(s,0, \mathbf{\theta}) = \mathbf{\theta}^\top \mathbf{x}(s)$, where $\mathbf{\theta}$ is the unit's weight vector.
 > 1. Show that if the exponential soft-max distribution (13.2) is used to convert action preferences to policies, then ${P_t = \pi(1|S_t, \theta_t)=1/(1+\exp(-\theta_t^\top\mathbf{x}(S_t)))}$ (the logistic function). 
 > 2. What is the Monte-Carlo REINFORCE update of $\theta_t$ to $\theta_{t+1}$ upon receipt of return $G_t$?
 > 3. Express the eligility $\nabla \ln \pi(a|s, \theta)$ for a Bernoulli-logistic unit, in terms of $a$, $\mathbf{x}(s)$, and $\pi(a|s, \theta)$ by calculating the gradient.
@@ -3574,7 +3572,7 @@ Transducers = "~0.4.75"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.9.0"
+julia_version = "1.10.5"
 manifest_format = "2.0"
 project_hash = "5e66dda1c073f4a7725f89e2d0373276bce180a3"
 
@@ -3686,7 +3684,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.2+0"
+version = "1.1.1+0"
 
 [[deps.CompositionsBase]]
 git-tree-sha1 = "455419f7e328a1a2493cabc6428d79e951349769"
@@ -3867,21 +3865,26 @@ version = "1.3.0"
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
 uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
-version = "0.6.3"
+version = "0.6.4"
 
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "7.84.0+0"
+version = "8.4.0+0"
 
 [[deps.LibGit2]]
-deps = ["Base64", "NetworkOptions", "Printf", "SHA"]
+deps = ["Base64", "LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
 uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
+
+[[deps.LibGit2_jll]]
+deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll"]
+uuid = "e37daf67-58a4-590a-8e99-b0245dd2ffc5"
+version = "1.6.4+0"
 
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
 uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
-version = "1.10.2+0"
+version = "1.11.0+1"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -3939,7 +3942,7 @@ version = "1.1.7"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
-version = "2.28.2+0"
+version = "2.28.2+1"
 
 [[deps.MicroCollections]]
 deps = ["BangBang", "InitialValues", "Setfield"]
@@ -3958,7 +3961,7 @@ uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2022.10.11"
+version = "2023.1.10"
 
 [[deps.NaNMath]]
 deps = ["OpenLibm_jll"]
@@ -3973,12 +3976,12 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.21+4"
+version = "0.3.23+4"
 
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "05823500-19ac-5b8b-9628-191a04bc5112"
-version = "0.8.1+0"
+version = "0.8.1+2"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -4024,7 +4027,7 @@ version = "2.5.8"
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.9.0"
+version = "1.10.0"
 
 [[deps.PlotlyBase]]
 deps = ["ColorSchemes", "Dates", "DelimitedFiles", "DocStringExtensions", "JSON", "LaTeXStrings", "Logging", "Parameters", "Pkg", "REPL", "Requires", "Statistics", "UUIDs"]
@@ -4081,7 +4084,7 @@ deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
 uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 
 [[deps.Random]]
-deps = ["SHA", "Serialization"]
+deps = ["SHA"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
 [[deps.Reexport]]
@@ -4143,6 +4146,7 @@ version = "1.1.0"
 [[deps.SparseArrays]]
 deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+version = "1.10.0"
 
 [[deps.SpecialFunctions]]
 deps = ["IrrationalConstants", "LogExpFunctions", "OpenLibm_jll", "OpenSpecFun_jll"]
@@ -4174,7 +4178,7 @@ version = "1.4.0"
 [[deps.Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
 uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
-version = "1.9.0"
+version = "1.10.0"
 
 [[deps.StatsAPI]]
 deps = ["LinearAlgebra"]
@@ -4207,9 +4211,9 @@ deps = ["Libdl", "LinearAlgebra", "Serialization", "SparseArrays"]
 uuid = "4607b0f0-06f3-5cda-b6b1-a6196a1729e9"
 
 [[deps.SuiteSparse_jll]]
-deps = ["Artifacts", "Libdl", "Pkg", "libblastrampoline_jll"]
+deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
-version = "5.10.1+6"
+version = "7.2.1+1"
 
 [[deps.TOML]]
 deps = ["Dates"]
@@ -4280,7 +4284,7 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
-version = "1.2.13+0"
+version = "1.2.13+1"
 
 [[deps.ZygoteRules]]
 deps = ["ChainRulesCore", "MacroTools"]
@@ -4291,17 +4295,17 @@ version = "0.2.3"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.7.0+0"
+version = "5.11.0+0"
 
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.48.0+0"
+version = "1.52.0+1"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.4.0+0"
+version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
